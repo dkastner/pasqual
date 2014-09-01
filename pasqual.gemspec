@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["dkastner@gmail.com"]
   spec.summary       = %q{Interface easily with postgres CLI tools}
   spec.description   = %q{Shortcuts for postgres commands, with option to use ENV-configured conenction URLs}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/dkastner/pasqual"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
