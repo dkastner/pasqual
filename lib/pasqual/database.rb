@@ -21,12 +21,12 @@ module Pasqual
       @port ||= 5432
     end
 
-    def createdb(name)
-      Createdb.execute username, password, host, port, name
+    def createdb(create_name = name)
+      Createdb.execute username, password, host, port, create_name
     end
 
-    def dropdb(name)
-      Dropdb.execute username, password, host, port, name
+    def dropdb(drop_name = name)
+      Dropdb.execute username, password, host, port, drop_name
     end
 
     def pipe_sql(file)
