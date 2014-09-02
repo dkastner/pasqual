@@ -4,20 +4,21 @@ module Pasqual
 
   class Command
 
-    def self.execute(program, username, password, host, port, name)
-      new(program, username, password, host, port, name).tap { |c| c.execute }
+    def self.execute(program, username, password, host, port, name, file = nil)
+      new(program, username, password, host, port, name, file).tap { |c| c.execute }
     end
 
-    attr_accessor :program, :username, :password, :host, :port, :name,
+    attr_accessor :program, :username, :password, :host, :port, :name, :file,
       :output, :status
 
-    def initialize(program, username, password, host, port, name)
+    def initialize(program, username, password, host, port, name, file = nil)
       self.program = program
       self.username = username
       self.password = password
       self.host = host
       self.port = port
       self.name = name
+      self.file = file
     end
 
     def execute
@@ -29,16 +30,22 @@ module Pasqual
 
       process.io.stdout = process.io.stderr = outfile
 
-      if password
-        # TODO: find out why piping to stdin doesn't work :(
-        ENV['PGPASSWORD'] = password
-        process.start
-        process.poll_for_exit(30)
-        ENV['PGPASSWORD'] = nil
-      else
-        process.start
-        process.poll_for_exit(30)
+      process.duplex = true if file
+
+      # TODO: find out why piping to stdin doesn't work :(
+      ENV['PGPASSWORD'] = password
+      process.start
+
+      if file
+        File.open file do |f|
+          process.io.stdin.puts f.read
+          process.io.stdin.flush
+        end
+        process.io.stdin.close
       end
+
+      process.poll_for_exit(30)
+      ENV['PGPASSWORD'] = nil
 
       outfile.rewind
       self.output = outfile.read

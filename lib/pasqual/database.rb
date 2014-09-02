@@ -1,6 +1,7 @@
 require 'uri'
 require 'pasqual/createdb'
 require 'pasqual/dropdb'
+require 'pasqual/psql'
 
 module Pasqual
 
@@ -26,6 +27,10 @@ module Pasqual
 
     def dropdb(name)
       Dropdb.execute username, password, host, port, name
+    end
+
+    def pipe_sql(file)
+      Psql.pipe file, username, password, host, port, name
     end
 
   end

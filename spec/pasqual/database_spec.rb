@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'securerandom'
 require 'pasqual/database'
 
 describe Pasqual::Database do
@@ -21,6 +22,19 @@ describe Pasqual::Database do
       expect do
         database.createdb name
       end.to raise_error(Pasqual::Createdb::AlreadyExists)
+    end
+
+  end
+
+  describe '#pipe_sql' do
+
+    it 'runs an sql script file' do
+      file = Tempfile.new 'sql-script'
+      file.puts "SELECT 0;"
+
+      expect do
+        database.pipe_sql file.path
+      end.to_not raise_error
     end
 
   end
