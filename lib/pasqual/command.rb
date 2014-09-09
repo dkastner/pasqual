@@ -36,11 +36,15 @@ module Pasqual
       ENV['PGPASSWORD'] = password
       process.start
 
-      if file
+      if file && File.exist?(file)
         File.open file do |f|
           process.io.stdin.puts f.read
           process.io.stdin.flush
         end
+        process.io.stdin.close
+      elsif file
+        process.io.stdin.puts file
+        process.io.stdin.flush
         process.io.stdin.close
       end
 

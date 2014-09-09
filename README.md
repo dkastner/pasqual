@@ -53,6 +53,14 @@ A custom name can optionally be specified:
 psql.dropdb 'foodb'
 ```
 
+### command
+
+Executes an SQL script, the same as piping text into the psql command.
+
+```ruby
+psql.command "SELECT * from users;"
+```
+
 ### pipe
 
 You can pipe a file into the `psql` command:

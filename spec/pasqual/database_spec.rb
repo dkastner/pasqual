@@ -26,6 +26,16 @@ describe Pasqual::Database do
 
   end
 
+  describe '#command' do
+
+    it 'runs an sql command' do
+      expect do
+        database.command "SELECT 0;"
+      end.to_not raise_error
+    end
+
+  end
+
   describe '#pipe_sql' do
 
     it 'runs an sql script file' do

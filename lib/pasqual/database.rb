@@ -29,6 +29,10 @@ module Pasqual
       Dropdb.execute username, password, host, port, drop_name
     end
 
+    def command(statement)
+      Psql.command statement, username, password, host, port, name
+    end
+
     def pipe_sql(file)
       Psql.pipe file, username, password, host, port, name
     end
