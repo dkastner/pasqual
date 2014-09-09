@@ -1,6 +1,6 @@
 # Pasqual
 
-TODO: Write a gem description
+Run Postgres CLI commands with the help of database settings configured with environment variables.
 
 ## Installation
 
@@ -20,7 +20,46 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+First, get an instance of Pasqual: 
+
+``` ruby
+psql = Pasqual.for ENV['DATABASE_URL']
+```
+
+### createdb
+
+Createdb automatically uses the database name defined in `ENV`.
+
+```ruby
+psql.createdb
+```
+
+A custom name can optionally be specified:
+
+```ruby
+psql.createdb 'foodb'
+```
+
+### dropdb
+
+Dropdb automatically uses the database name defined in `ENV`.
+
+```ruby
+psql.dropdb
+```
+A custom name can optionally be specified:
+
+```ruby
+psql.dropdb 'foodb'
+```
+
+### pipe
+
+You can pipe a file into the `psql` command:
+
+```ruby
+psql.pipe_sql '/path/to/file.sql'
+```
 
 ## Contributing
 
