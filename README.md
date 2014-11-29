@@ -2,6 +2,8 @@
 
 Run Postgres CLI commands with the help of database settings configured with environment variables.
 
+![](https://travis-ci.org/dkastner/pasqual.svg?branch=master)
+
 ## Installation
 
 Add this line to your application's Gemfile:
