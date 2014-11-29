@@ -33,8 +33,8 @@ module Pasqual
       Psql.command statement, username, password, host, port, name
     end
 
-    def pipe_sql(file)
-      Psql.pipe file, username, password, host, port, name
+    def pipe_sql(file, dbname = name)
+      Psql.pipe file, username, password, host, port, dbname
     end
 
   end
