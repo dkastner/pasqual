@@ -27,6 +27,7 @@ describe Pasqual::Database do
   end
 
   describe '#command' do
+    before { database.createdb rescue Pasqual::Dropdb::Failed }
 
     it 'runs an sql command' do
       expect do
@@ -37,6 +38,7 @@ describe Pasqual::Database do
   end
 
   describe '#pipe_sql' do
+    before { database.createdb rescue Pasqual::Dropdb::Failed }
 
     it 'runs an sql script file' do
       file = Tempfile.new 'sql-script'
