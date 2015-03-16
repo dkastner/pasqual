@@ -13,7 +13,7 @@ module Pasqual
       cmd = Command.execute 'createdb', username, password, host, port, name
 
       raise AlreadyExists if cmd.output =~ /already exists/
-      raise Failed unless cmd.success?
+      raise(Failed, cmd.output) unless cmd.success?
       true
     end
 
