@@ -48,6 +48,7 @@ module Pasqual
         process.io.stdin.close
       end
 
+      process.wait
       ENV['PGPASSWORD'] = nil
 
       outfile.rewind
