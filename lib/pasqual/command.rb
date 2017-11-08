@@ -26,7 +26,7 @@ module Pasqual
       outfile.sync = true
 
       process = ChildProcess.build program,
-        *Arglist.args(username, password, host, port, name)
+        *Arglist.args(program, username, password, host, port, name)
 
       process.io.stdout = process.io.stderr = outfile
 

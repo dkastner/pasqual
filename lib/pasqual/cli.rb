@@ -56,7 +56,7 @@ module Pasqual
       end
       db = pasqual(url)
       args = Pasqual::Arglist.
-        args(db.username, db.password, db.host, db.port, db.name)
+        args('psql', db.username, db.password, db.host, db.port, db.name)
       if sql_args.any?
         args << '-c'
         args += sql_args.map(&:inspect)
